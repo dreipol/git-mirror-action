@@ -20,10 +20,6 @@ inputs:
     description: 'Username that is use for ssh.'
     required: true
     default: ''
-  private_key:
-    description: 'Private key of given user.'
-    required: true
-    default: ''
 
 runs:
   using: 'docker'
