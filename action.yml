@@ -8,10 +8,6 @@ inputs:
     description: 'SSH URL of the source repo.'
     required: true
     default: ''
-  source_branch:
-    description: 'Name of the source branch.'
-    required: false
-    default: 'master'
   target_branch:
     description: 'Name of the target (remote) branch.'
     required: false
