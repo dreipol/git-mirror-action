@@ -11,4 +11,5 @@ export GIT_SSH_COMMAND="ssh -v -i ~/.ssh/id_rsa -l $INPUT_USER"
 
 # Mirror it!
 git remote add mirror "$INPUT_REPO"
+git fetch
 git push mirror --force HEAD:"$INPUT_TARGET_BRANCH"
