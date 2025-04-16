@@ -15,4 +15,9 @@ git config --global --add safe.directory /github/workspace
 git remote add mirror "$INPUT_REPO"
 git fetch mirror
 git lfs push mirror "$INPUT_TARGET_BRANCH"
-git push mirror --force HEAD:"$INPUT_TARGET_BRANCH"
+
+if [ "$INPUT_FORCE" = "true" ]; then
+  git push mirror --force HEAD:"$INPUT_TARGET_BRANCH"
+else
+  git push mirror HEAD:"$INPUT_TARGET_BRANCH"
+fi

@@ -16,6 +16,10 @@ inputs:
     description: 'Username that is use for ssh.'
     required: true
     default: ''
+  force:
+    description: 'Force push to the target branch.'
+    required: false
+    default: 'true'
 
 runs:
   using: 'docker'
