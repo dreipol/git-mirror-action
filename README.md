@@ -10,9 +10,10 @@ See [action.yml](action.yml)
 
 ```yaml
 steps:
-  - uses: actions/checkout@v1.1.0
+  - uses: actions/checkout@v4
     with:
       ref: master # Source branch you want to mirror
+      fetch-depth: 0 # !important! Fetch full history of the branch !important!
   - uses: dreipol/git-mirror-action@master
     env:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
