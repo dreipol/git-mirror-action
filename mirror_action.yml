@@ -1,0 +1,26 @@
+name: 'Mirror a repository using SSH'
+description: 'Action for mirroring a repository in another location using SSH.'
+branding:
+  icon: 'copy'
+  color: 'orange'
+inputs:
+  repo:
+    description: 'SSH URL of the source repo.'
+    required: true
+    default: ''
+  target_branch:
+    description: 'Name of the target (remote) branch.'
+    required: false
+    default: 'master'
+  user:
+    description: 'Username that is use for ssh.'
+    required: true
+    default: ''
+  force:
+    description: 'Force push to the target branch.'
+    required: false
+    default: 'true'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

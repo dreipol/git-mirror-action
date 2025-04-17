@@ -4,14 +4,14 @@ branding:
   icon: 'copy'
   color: 'orange'
 inputs:
-  repo:
-    description: 'SSH URL of the source repo.'
-    required: true
-    default: ''
   source_branch:
-    description: 'Name of the target (local) branch.'
+    description: 'Name of the source (local) branch.'
     required: false
     default: 'master'
+  repo:
+    description: 'SSH URL of the target repo.'
+    required: true
+    default: ''
   target_branch:
     description: 'Name of the target (remote) branch.'
     required: false
@@ -24,6 +24,10 @@ inputs:
     description: 'Force push to the target branch.'
     required: false
     default: 'true'
+secrets:
+  SSH_PRIVATE_KEY:
+    description: 'SSH private key for authentication.'
+    required: true
 
 runs:
   using: 'composite'
@@ -34,7 +38,7 @@ runs:
         ref: ${{ inputs.source_branch }}
         fetch-depth: 0
     - name: Mirror repository
-      uses: ./ # Use the local action
+      uses: ./mirror_action.yml # Use the local action
       with:
         repo: ${{ inputs.repo }}
         user: ${{ inputs.user }}
