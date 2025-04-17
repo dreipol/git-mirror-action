@@ -8,6 +8,10 @@ inputs:
     description: 'SSH URL of the source repo.'
     required: true
     default: ''
+  source_branch:
+    description: 'Name of the target (local) branch.'
+    required: false
+    default: 'master'
   target_branch:
     description: 'Name of the target (remote) branch.'
     required: false
@@ -22,5 +26,19 @@ inputs:
     default: 'true'
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'composite'
+  steps:
+    - name: Checkout source branch
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.source_branch }}
+        fetch-depth: 0
+    - name: Mirror repository
+      uses: ./ # Use the local action
+      with:
+        repo: ${{ inputs.repo }}
+        user: ${{ inputs.user }}
+        target_branch: ${{ inputs.target_branch }}
+        force: ${{ inputs.force }}
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
